@@ -195,7 +195,11 @@ then
 	echo "-----> DB2 dependency found, Installing DB2 dependency..."
 	if test -d $cache/clidriver; then
 		echo "-----> Restoring DB2 ODBC driver [DB2 CLI] setup from cache"
+		ls -R $cache/clidriver
 		cp -r $cache/clidriver $build/
+		export CGO_LDFLAGS=-L$CLI_DIR/lib
+		export CGO_CFLAGS=-I$CLI_DIR/include
+
     else
 		install_db2_odbc "${build}"
 	fi
