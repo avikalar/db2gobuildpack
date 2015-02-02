@@ -201,9 +201,6 @@ then
 			echo "-----> CLI Driver directory copied to build directory"
 			export CGO_LDFLAGS=-L$build/clidriver/lib
 			export CGO_CFLAGS=-I$build/clidriver/include
-		else
-			export CGO_LDFLAGS=-L$cache/clidriver/lib
-			export CGO_CFLAGS=-I$cache/clidriver/include
 		fi
 
     	else
