@@ -197,10 +197,16 @@ then
 		echo "-----> Restoring DB2 ODBC driver [DB2 CLI] setup from cache"
 		#ls -R $cache/clidriver
 		cp -r $cache/clidriver $build/
-		export CGO_LDFLAGS=-L$cache/clidriver/lib
-		export CGO_CFLAGS=-I$cache/clidriver/include
+		if test -d $build/clidriver; then
+			echo "-----> CLI Driver directory copied to build directory"
+			export CGO_LDFLAGS=-L$build/clidriver/lib
+			export CGO_CFLAGS=-I$build/clidriver/include
+		else
+			export CGO_LDFLAGS=-L$cache/clidriver/lib
+			export CGO_CFLAGS=-I$cache/clidriver/include
+		fi
 
-    else
+    	else
 		install_db2_odbc "${build}"
 	fi
 fi
